@@ -5,21 +5,24 @@ import Movies from './Movies'
 import Animeseries from './Animeseries'
 import Trending from './Trends'
 import Pricing from './Pricing'
-
 import '../Styles/NavBarStyle.css'
+
+export const Container = React.createContext()
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(true)
   return (
+    <Container.Provider value={toggle}>
     <Fragment>
       <nav className={toggle ?"" : "navBarColor"}>
         <div className="nav-options">
-          <h1 id={toggle ? '': "heading"}>AnimeStorm</h1>
+          <h1 id={toggle ? '': "heading"}>Movie Storm</h1>
           <NavLink to="" style={({isActive})=>{return{color:isActive ? '#fff' : '#EE9B00'}}}>
-          <span id={toggle ? 'Movies': "MoviesLight"}>Anime Movies</span>
+          <span id={toggle ? 'Movies': "MoviesLight"}>Movies</span>
           </NavLink>
           <NavLink to="/Animeseries" style={({isActive})=>{return{color:isActive ? '#fff' : '#EE9B00'}}}>
-          <span id={toggle ? 'Movies': "MoviesLight"}>Anime Series  </span>
+          <span id={toggle ? 'Movies': "MoviesLight"}>TV Shows
+  </span>
           </NavLink>
           <NavLink to="Trending" style={({isActive})=>{return{color:isActive ? '#fff' : '#EE9B00'}}}>
           <span id={toggle ? 'Movies': "MoviesLight"}>Trendings</span>
@@ -44,6 +47,7 @@ const Navbar = () => {
       </Routes>
 
     </Fragment>
+    </Container.Provider>
   )
 }
 
