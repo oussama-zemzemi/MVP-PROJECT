@@ -7,12 +7,14 @@ import Trending from './Trends'
 import Pricing from './Pricing'
 import '../Styles/NavBarStyle.css'
 
+
 export const Container = React.createContext()
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(true)
+  const [inputValue, setInputValue] = useState('')
   return (
-    <Container.Provider value={toggle}>
+    <Container.Provider value={{toggle, inputValue}}>
     <Fragment>
       <nav className={toggle ?"" : "navBarColor"}>
         <div className="nav-options">
@@ -30,20 +32,27 @@ const Navbar = () => {
           <NavLink to="Pricing" style={({isActive})=>{return{color:isActive ? '#fff' : '#EE9B00'}}}>
           <span id={toggle ? 'Movies': "MoviesLight"}>Pricing</span>
           </NavLink>
+          
         </div>
         <div className="input-group">
-        <input type="text" placeholder='Search whatever you want'/>
+        <input type="text" placeholder='Search....' onChange={(e) => setInputValue(e.target.value)}/>
         <HiSearch fontSize={21} color="blue" id="search"/>
         <div id="Color-switcher" onClick={()=> setToggle(!toggle)}>
-        <div id={ toggle ? "Color-switcher-mover":"Color-switcher-moved"}></div>
+        <div id={ toggle ? "Color-switcher-mover":"Color-switcher-moved"}>
+          
+
+        </div>
         </div>
         </div>
       </nav>
+      
       <Routes>
       <Route path="/" element={<Movies />} />
       <Route path="Animeseries" element={<Animeseries />} />
       <Route path="Trending" element={<Trending />} />
       <Route path="Pricing" element={<Pricing />} />
+      
+      
       </Routes>
 
     </Fragment>
